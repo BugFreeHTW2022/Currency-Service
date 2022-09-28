@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  currency:
+    container_name: CurrencyApp
+    image: currency:latest
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    ports:
+      - 8083:8083
+    environment:
+      - spring_rabbitmq_host=rabbitmq
+      - spring_rabbitmq_port=5672
+      - spring_rabbitmq_username=guest
+      - spring_rabbitmq_password=guest
+    networks:
+      - warehouse_warehouseNetwork
+
+networks:
+  warehouse_warehouseNetwork:
+    external: true
